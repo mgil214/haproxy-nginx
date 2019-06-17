@@ -1,0 +1,31 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  tasks:
+  - name: Install EPEL Repository
+    yum:
+      name: epel-release
+      state: present
+
+- hosts: HAproxy
+  become: yes
+  become_method: sudo
+  tasks:
+  - debug:
+      msg: "Running HAproxy playbook and roles"
+  - include_role:
+      name: haproxy
+  - debug:
+      msg: "Finished HAproxy setup"
+
+- hosts: Nginx
+  become: yes
+  become_method: sudo
+  tasks:
+  - debug:
+      msg: "Running Nginx playbook and roles"
+  - include_role:
+      name: nginx
+  - debug:
+      msg: "Finished Nginx setup"

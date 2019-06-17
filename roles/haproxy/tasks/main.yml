@@ -1,0 +1,13 @@
+- name: Installing Packages
+  yum:
+    name: "{{ item }}"
+    state: latest
+    with_items:
+       - haproxy
+  notify: reload haproxy
+
+- name: Configuring HAproxy
+  template:
+    src: haproxy.j2
+    dest: "/etc/haproxy/haproxy.conf"
+    mode: '0644'

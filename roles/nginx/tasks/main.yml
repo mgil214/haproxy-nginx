@@ -2,8 +2,8 @@
   yum:
     name: "{{ item }}"
     state: latest
-    with_items:
-       - nginx
+  loop:
+    - nginx
   notify: reload nginx
 
 - name: Configuring Nginx

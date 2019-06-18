@@ -1,0 +1,7 @@
+
+[HAproxy]
+Test1 ansible_host=172.31.26.36
+
+[Nginx]
+Test2 ansible_host=172.31.23.104
+Test3 ansible_host=172.31.16.128

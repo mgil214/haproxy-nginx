@@ -1,0 +1,27 @@
+worker_processes 1;
+daemon off;
+error_log nginx_error.log;
+events {
+    worker_connections 1024;
+}
+
+http {
+    server {
+        listen 8000;
+        location /probe_local {
+            root /var/www/local.html;
+        }
+
+        location /probe_applicant {
+            root /;
+        }
+
+        location /* {
+            https://www.coursera.org/;
+        }
+
+        location /probe_remote {
+            localhost:5500
+        }
+    }
+}

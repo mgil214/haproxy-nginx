@@ -1,4 +1,6 @@
 - name: reload nginx
+  become: yes
+  become_method: sudo
   service:
     name: nginx
     state: reloaded

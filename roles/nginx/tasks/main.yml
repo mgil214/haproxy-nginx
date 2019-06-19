@@ -4,14 +4,21 @@
     state: latest
   loop:
     - nginx
+# I made a loop for a hypothetical case were it should some other packages present
 
-- name: Creating The Web Page
+- name: Create a directory if it does not exist
+  file:
+    path: /var/www/
+    state: directory
+    mode: '0755'
+
+- name: Create a Web Page
   template:
     src: local.j2
     dest: "/var/www/local.html"
     mode: '0644'
 
-- name: Configuring Nginx
+- name: Configure Nginx
   template:
     src: nginx.j2
     dest: "/etc/nginx/nginx.conf"

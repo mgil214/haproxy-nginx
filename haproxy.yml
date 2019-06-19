@@ -1,3 +1,8 @@
 ---
 - hosts: HAproxy
-  roles: haproxy
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - include_role: 
+        name: haproxy

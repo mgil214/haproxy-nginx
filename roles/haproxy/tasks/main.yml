@@ -4,6 +4,7 @@
     state: latest
   loop:
     - haproxy
+# I made a loop for a hypothetical case were it should some other packages present
 
 - name: Configuring HAproxy
   template:

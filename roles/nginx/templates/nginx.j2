@@ -1,13 +1,26 @@
 worker_processes 1;
+# Because I tested on 1 CPU host
+
 daemon off;
+pid /var/run/nginx.pid;
 error_log nginx_error.log;
 events {
     worker_connections 1024;
 }
 
 http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
     server {
         listen 8000;
+
+        access_log   /var/log/nginx/access.log  main;
+
         location /probe_local {
             root /var/www/local.html;
         }
@@ -17,11 +30,11 @@ http {
         }
 
         location /* {
-            https://www.coursera.org/;
+            proxy_pass https://www.coursera.org;
         }
 
         location /probe_remote {
-            localhost:5500
+            proxy_pass http://localhost:5500;
         }
     }
 }

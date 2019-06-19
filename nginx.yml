@@ -1,2 +1,8 @@
+---
 - hosts: Nginx
-  roles: nginx
+  become: yes
+  become_method: sudo
+  
+  tasks:
+    - include_role:
+        name: nginx

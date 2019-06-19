@@ -1,9 +1,13 @@
+user nginx;
+
 worker_processes 1;
 # Because I tested on 1 CPU host
 
-daemon off;
+#daemon off;
 pid /var/run/nginx.pid;
-error_log nginx_error.log;
+
+error_log /var/log/nginx_error.log;
+
 events {
     worker_connections 1024;
 }

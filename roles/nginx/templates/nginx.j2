@@ -25,26 +25,29 @@ http {
 
         access_log   /var/log/nginx/access.log  main;
 
-        root /var/www;
+        root /var/www/;
 
         location / {
             index local.html;
         }
 
-        location ^/probe_local {
-            /var/www/local.html;
+        location /probe_local/ {
+#            sub_filter /probe_local/ /;
+            root /var/www;
+#            rewrite ^/probe_local/(.*)$ $1 break;
+            index local.html;
         }
 
-#        location /probe_applicant {
-#            proxy_pass
-#        }
-
-        location ~ ^/dogs$ {
-            proxy_pass https://httpstatusdogs.com;
+        location /probe_applicant/ {
+            return 301 https://calendar.google.com/calendar?cid=ZDV1ZjcwdGlhMGIzMnJ2MW0wcTd1cWFndmdAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ;
         }
 
-        location ~ ^/probe_remote {
-            fastcgi_pass localhost:5500;
+        location /dogs/ {
+            return 301 http://httpstatusdogs.com;
+        }
+
+        location /probe_remote/ {
+            return 301 localhost:5500;
         }
     }
 }

@@ -25,20 +25,26 @@ http {
 
         access_log   /var/log/nginx/access.log  main;
 
-        location /probe_local {
-            root /var/www/local.html;
+        root /var/www;
+
+        location / {
+            index local.html;
         }
 
-        location /probe_applicant {
-            root /;
+        location ^/probe_local {
+            /var/www/local.html;
         }
 
-        location /* {
-            proxy_pass https://httpstatusdogs.com/;
+#        location /probe_applicant {
+#            proxy_pass
+#        }
+
+        location ~ ^/dogs$ {
+            proxy_pass https://httpstatusdogs.com;
         }
 
-        location /probe_remote {
-            proxy_pass http://localhost:5500;
+        location ~ ^/probe_remote {
+            fastcgi_pass localhost:5500;
         }
     }
 }

@@ -4,6 +4,7 @@
     state: latest
   loop:
     - nginx
+  notify: start nginx
 # I made a loop for a hypothetical case were it should some other packages present
 
 - name: Create a directory if it does not exist

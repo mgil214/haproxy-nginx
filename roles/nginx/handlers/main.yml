@@ -1,3 +1,11 @@
+- name: start nginx
+  become: yes
+  become_method: sudo
+  service:
+    name: nginx
+    state: started
+    enabled: True
+
 - name: reload nginx
   become: yes
   become_method: sudo

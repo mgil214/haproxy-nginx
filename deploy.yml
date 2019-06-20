@@ -7,6 +7,15 @@
     yum:
       name: epel-release
       state: present
+  - name: Set SELinux policy to permissive mode
+    selinux:
+      policy: targeted
+      state: permissive
+  - name: Stop and disable firewall
+    service:
+      name: iptables
+      state: stopped
+      enabled: False
 
 - hosts: HAproxy
   become: yes

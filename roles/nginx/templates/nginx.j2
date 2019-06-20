@@ -31,22 +31,19 @@ http {
             index local.html;
         }
 
-        location /probe_local/ {
-#            sub_filter /probe_local/ /;
-            root /var/www;
-#            rewrite ^/probe_local/(.*)$ $1 break;
-            index local.html;
+        location /probe_local {
+            rewrite ^/probe_local(.*) /$1;
         }
 
-        location /probe_applicant/ {
+        location /probe_applicant {
             return 301 https://calendar.google.com/calendar?cid=ZDV1ZjcwdGlhMGIzMnJ2MW0wcTd1cWFndmdAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ;
         }
 
-        location /dogs/ {
+        location /* {
             return 301 http://httpstatusdogs.com;
         }
 
-        location /probe_remote/ {
+        location /probe_remote {
             return 301 localhost:5500;
         }
     }

@@ -3,26 +3,12 @@
   become: yes
   become_method: sudo
   tasks:
-  - name: Install EPEL Repository
-    yum:
-      name: epel-release
-      state: present
-  - name: Set SELinux policy to permissive mode
-    selinux:
-      policy: targeted
-      state: permissive
-  - name: Stop and disable firewall
-    service:
-      name: iptables
-      state: stopped
-      enabled: False
-  - name: Disable reboot and shutdown possibility
-    file:
-      path: "{{ item }}"
-      mode: 0644
-    loop:
-      - /sbin/shutdown
-      - /sbin/reboot
+  - debug:
+      msg: "Performing initial setup"
+  - include_role:
+      name: common
+  - debug:
+      msg: "Finished setup"
 
 - hosts: HAproxy
   become: yes

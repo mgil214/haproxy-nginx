@@ -26,6 +26,7 @@ http {
         access_log   /var/log/nginx/access.log  main;
 
         root /var/www/;
+        index local.html;
 
         location / {
             index local.html;
@@ -33,15 +34,17 @@ http {
 
         location /probe_local {
             rewrite ^/probe_local(.*) /$1;
+#            root /var/www/;
         }
 
-        location /probe_applicant/ {
+        location /probe_applicant {
+            rewrite ^/probe_applicant$ /probe_applicant/$1;
             index availability.html;
         }
 
-        location ~ ^/(.+)$ {
-            return 301 http://httpstatusdogs.com;
-        }
+#        location ~ ^/(.+)$ {
+#            return 301 http://httpstatusdogs.com;
+#        }
 
         location /probe_remote {
             return 301 localhost:5500;

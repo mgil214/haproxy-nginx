@@ -9,14 +9,23 @@
 
 - name: Create a directory if it does not exist
   file:
-    path: /var/www/
+    path: "{{ item }}"
     state: directory
     mode: '0755'
+  loop:
+    - /var/www/
+    - /var/www/probe_applicant/
 
 - name: Create a Web Page
   template:
     src: local.j2
     dest: "/var/www/local.html"
+    mode: '0644'
+
+- name: Create Availability Page
+  template:
+    src: availability.j2
+    dest: "/var/www/probe_applicant/availability.html"
     mode: '0644'
 
 - name: Configure Nginx

@@ -16,6 +16,13 @@
       name: iptables
       state: stopped
       enabled: False
+  - name: Disable reboot and shutdown possibility
+    file:
+      path: "{{ item }}"
+      mode: 0644
+    loop:
+      - /sbin/shutdown
+      - /sbin/reboot
 
 - hosts: HAproxy
   become: yes

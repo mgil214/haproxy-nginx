@@ -77,5 +77,5 @@ backend static
 backend app-main
     balance roundrobin
     option httpchk HEAD / HTTP/1.1\r\nHost:\ localhost
-    server Test2 172.31.23.104:8000 check
-    server Test3 172.31.16.128:8000 check
+    server Test2 192.168.30.2:8000 check
+    server Test3 192.168.30.3:8000 check

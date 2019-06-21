@@ -27,7 +27,7 @@ The execution of the playbook is quite straitforward.
 
 ansible-playbook deploy.yml -i hosts -u <USERNAME>
 
-It is also possible to to copy the "hosts" file to /etc/ansible/ directory. After that it is possibly just run
+It is also possible to to copy the "hosts" file to /etc/ansible/ directory. After that it is possible to just run
 "ansible-playbook deploy.yml" command with the username provided if needed.
 If the username is equal to th remote user then it is not necessary.
 

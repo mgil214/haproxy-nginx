@@ -12,3 +12,4 @@
     dest: "/etc/haproxy/haproxy.cfg"
     mode: '0644'
   notify: reload haproxy
+

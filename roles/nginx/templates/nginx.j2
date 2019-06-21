@@ -22,19 +22,16 @@ http {
 
     server {
         listen 8000;
+        server_name localhost;
 
         access_log   /var/log/nginx/access.log  main;
 
         root /var/www/;
         index local.html;
 
-        location / {
-            index local.html;
-        }
-
         location /probe_local {
-            rewrite ^/probe_local(.*) /$1;
-#            root /var/www/;
+            alias /var/www/;
+            autoindex on;
         }
 
         location /probe_applicant {
@@ -42,9 +39,9 @@ http {
             index availability.html;
         }
 
-#        location ~ ^/(.+)$ {
-#            return 301 http://httpstatusdogs.com;
-#        }
+        location ~ ^/(?!probe_local)(?!probe_applicant)(?!probe_remote)(.+)($|/$) {
+            return 301 http://httpstatusdogs.com;
+        }
 
         location /probe_remote {
             return 301 localhost:5500;
